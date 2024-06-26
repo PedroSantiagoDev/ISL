@@ -31,7 +31,7 @@
 
             @auth
                 <div class="space-x-6 font-bold flex">
-                    <a href="/jobs/create">Adcionar Livro</a>
+                    <a href="/books/create">Adcionar Livro</a>
 
                     <form method="POST" action="/logout">
                         @csrf

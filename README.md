@@ -1,66 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Libary ISL
+### Objetivo do Trabalho
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+O objetivo do trabalho é implementar um sistema de gerenciamento de livros de uma biblioteca usando uma linguagem de programação orientada a objetos (Java, Python, PHP ou C#) e um banco de dados relacional (MySQL, PostgreSQL ou SQL Server). O sistema deve ser capaz de:
 
-## About Laravel
+1. Adicionar livros à biblioteca.
+2. Listar livros disponíveis na biblioteca.
+3. Armazenar informações de autores.
+4. Associar autores aos livros.
+5. Implementar uma interface (web ou desktop) para acessar essas funcionalidades.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Passo a Passo do Trabalho
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+#### 1. Preparação do Ambiente
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Escolha da Linguagem**: Decida se você vai usar Java, Python, PHP ou C#.
+- **Banco de Dados**: Utilize MySQL, PostgreSQL ou SQL Server.
+- **Ferramentas**: Instale uma IDE apropriada (ex.: IntelliJ IDEA, Eclipse, Visual Studio Code, etc.) e configure o ambiente de desenvolvimento.
 
-## Learning Laravel
+#### 2. Configuração do Banco de Dados
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Crie um banco de dados no MySQL e configure as tabelas necessárias. Abaixo está a consulta SQL para criar as tabelas `livros`, `autores`, `bibliotecas` e a tabela de associação `autor_livro`.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+```sql
+CREATE DATABASE biblioteca;
+USE biblioteca;
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+CREATE TABLE livros (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(255) NOT NULL,
+    isbn VARCHAR(255) NOT NULL,
+    ano INT NOT NULL,
+    area VARCHAR(255),
+    editora VARCHAR(255)
+);
 
-## Laravel Sponsors
+CREATE TABLE autores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    sobrenome VARCHAR(255) NOT NULL,
+    biografia TEXT
+);
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+CREATE TABLE bibliotecas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    endereco VARCHAR(255) NOT NULL
+);
 
-### Premium Partners
+CREATE TABLE autor_livro (
+    autor_id INT,
+    livro_id INT,
+    PRIMARY KEY (autor_id, livro_id),
+    FOREIGN KEY (autor_id) REFERENCES autores(id),
+    FOREIGN KEY (livro_id) REFERENCES livros(id)
+);
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+#### Passos para Implementação:
 
-## Contributing
+1. **Configuração do Ambiente**:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    - Instale a linguagem de programação escolhida.
+    - Configure o banco de dados (MySQL, PostgreSQL ou SQL Server).
+2. **Criação do Banco de Dados**:
 
-## Code of Conduct
+    - Crie um banco de dados chamado `biblioteca`.
+    - Crie as tabelas `livros`, `autores`, `bibliotecas` e a tabela de associação `autor_livro`.
+3. **Definição das Classes**:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    - Implemente as classes `Livro`, `Autor` e `Biblioteca` conforme o diagrama UML.
+4. **Criação das Migrações e Modelos**:
 
-## Security Vulnerabilities
+    - Utilize o framework (Laravel, Django, etc.) para criar as migrações e modelos de banco de dados.
+5. **Implementação dos Métodos**:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    - Adicione os métodos nas classes para manipular os dados (CRUD).
+6. **Criação da Interface**:
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    - Crie as telas (formulários e listas) para adicionar, listar e emprestar livros.
+    - Utilize um framework de front-end (Blade, Django Templates, etc.) para a interface.
