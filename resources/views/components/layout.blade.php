@@ -25,8 +25,8 @@
 
             <div class="space-x-6 font-bold">
                 <a href="/">Livros</a>
-                <a href="{{ route('author.index') }}">Autores</a>
-                <a href="{{ route('library.index') }}">Bibliotecas</a>
+                <a href="/author">Autores</a>
+                <a href="/library">Bibliotecas</a>
             </div>
 
             @auth

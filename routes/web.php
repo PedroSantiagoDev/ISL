@@ -8,17 +8,19 @@ use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'index'])->name('home');
+Route::get('/author', [BookController::class, 'index']);
+Route::get('/library', [BookController::class, 'index']);
 
 Route::resource('books', BookController::class)
     ->only(['create', 'store'])
     ->middleware(['auth']);
 
 Route::resource('author', AuthorController::class)
-    ->only(['index', 'create', 'store'])
+    ->only(['create', 'store'])
     ->middleware(['auth']);
 
 Route::resource('library', LibraryController::class)
-    ->only(['index', 'create', 'store'])
+    ->only(['create', 'store'])
     ->middleware(['auth']);
 
 Route::middleware('guest')->group(function () {
