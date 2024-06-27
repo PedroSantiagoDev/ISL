@@ -8,29 +8,30 @@
         <x-forms.input label="Área" name="area" placeholder="Área"/>
         <x-forms.input label="Editora" name="publisher" placeholder="Editora"/>
 
-        <x-forms.divider />
+        <x-forms.divider/>
 
-        <x-page-heading>Autor</x-page-heading>
+        <x-forms.select label="Biblioteca" name="library_id">
+            @if($libraries)
+                @foreach($libraries as $library)
+                    <option value="{{ $library->id }}">{{ $library->name }}</option>
+                @endforeach
+            @else
+                <option>Sem bibliotecas cadastradas...</option>
+            @endif
+        </x-forms.select>
 
-        <x-forms.input label="Nome" name="name" placeholder="Nome"/>
-        <x-forms.input label="Sobrenome" name="surname" placeholder="Sobrenome"/>
-        <x-forms.input label="Biografia" name="biography" placeholder="Biografia"/>
+        <x-forms.divider/>
 
-        <x-forms.divider />
-
-        <x-page-heading>Biblioteca</x-page-heading>
-
-        <x-forms.input label="Nome" name="name" placeholder="Nome"/>
-        <x-forms.input label="Endereço" name="address" placeholder="Endereço"/>
+        <x-forms.select label="Autores" name="authors">
+            @if($authors)
+                @foreach($authors as $author)
+                    <option class="text-black" value="{{ $library->id }}">{{ $author->first_name }} {{ $author->last_name }}</option>
+                @endforeach
+            @else
+                <option>Sem autores cadastradas...</option>
+            @endif
+        </x-forms.select>
 
         <x-forms.button>Adicionar</x-forms.button>
     </x-forms.form>
 </x-layout>
-
-{{--$table->id();--}}
-{{--$table->string('title');--}}
-{{--$table->string('isbn');--}}
-{{--$table->string('year');--}}
-{{--$table->string('area');--}}
-{{--$table->string('publisher');--}}
-{{--$table->timestamps();--}}

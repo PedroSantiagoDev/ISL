@@ -25,13 +25,16 @@
 
             <div class="space-x-6 font-bold">
                 <a href="/">Livros</a>
-                <a href="#">Autores</a>
-                <a href="#">Bibliotecas</a>
+                <a href="{{ route('author.index') }}">Autores</a>
+                <a href="{{ route('library.index') }}">Bibliotecas</a>
             </div>
 
             @auth
                 <div class="space-x-6 font-bold flex">
-                    <a href="/books/create">Adcionar Livro</a>
+                    <p>Adcionar:</p>
+                    <a href="/books/create">Livro</a>
+                    <a href="/author/create">Autor</a>
+                    <a href="/library/create">Biblioteca</a>
 
                     <form method="POST" action="/logout">
                         @csrf

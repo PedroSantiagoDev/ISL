@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Library;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -13,12 +16,9 @@ class BookController extends Controller
      */
     public function index(): View
     {
-//        $books = Book::all();
+        $books = Book::all();
 
-        return view('books.index', [
-            'books' => '$books[0]',
-            'featuredBooks' => '$books[1]',
-        ]);
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -26,32 +26,31 @@ class BookController extends Controller
      */
     public function create(): View
     {
-        return view('books.create');
+        $libraries = Library::all();
+        $authors = Author::all();
+
+        return view('books.create', compact('libraries', 'authors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $bookAttributes = $request->validate([
             'title' => ['required', 'min:3'],
             'isbn' => ['required', 'nullable'],
             'year' => ['required'],
             'area' => ['required'],
-            'publisher' => ['required']
+            'publisher' => ['required'],
+            'library_id' => ['required'],
+            'authors' => ['required'],
+            'authors.*' => ['exists:authors,id']
         ]);
 
-        $authorAttributes = $request->validate([
-            'name' => ['required', 'nullable'],
-            'surname' => ['required'],
-            'biography' => ['required']
-        ]);
-
-        $libraryAttributes = $request->validate([
-            'name' => ['required', 'nullable'],
-            'surname' => ['address']
-        ]);
+        $book = Book::create($bookAttributes);
+        $book->authors()->attach($request->authors);
+        return redirect('/');
     }
 
     /**

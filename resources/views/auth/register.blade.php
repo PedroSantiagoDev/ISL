@@ -7,6 +7,6 @@
         <x-forms.input label="Senha" name="password" type="password" />
         <x-forms.input label="Confirmação de Senha" name="password_confirmation" type="password" />
 
-        <x-forms.button>Criar Senha</x-forms.button>
+        <x-forms.button>Criar Conta</x-forms.button>
     </x-forms.form>
 </x-layout>
