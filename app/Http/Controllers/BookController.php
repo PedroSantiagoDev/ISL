@@ -34,7 +34,24 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bookAttributes = $request->validate([
+            'title' => ['required', 'min:3'],
+            'isbn' => ['required', 'nullable'],
+            'year' => ['required'],
+            'area' => ['required'],
+            'publisher' => ['required']
+        ]);
+
+        $authorAttributes = $request->validate([
+            'name' => ['required', 'nullable'],
+            'surname' => ['required'],
+            'biography' => ['required']
+        ]);
+
+        $libraryAttributes = $request->validate([
+            'name' => ['required', 'nullable'],
+            'surname' => ['address']
+        ]);
     }
 
     /**
